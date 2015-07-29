@@ -86,6 +86,11 @@
                     <view key="view" contentMode="scaleToFill" id="ebg-uJ-i4b">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AXx-6D-Zve">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Seeker" id="lqS-GK-mZr">
@@ -96,6 +101,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="AXx-6D-Zve" id="4Sp-bH-pQo"/>
                         <segue destination="4Zo-HQ-qXZ" kind="presentation" identifier="showLogin" id="tyw-KK-VvH"/>
                     </connections>
                 </viewController>
@@ -141,6 +147,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZMW-7F-dsF"/>
+        <segue reference="tyw-KK-VvH"/>
     </inferredMetricsTieBreakers>
 </document>
