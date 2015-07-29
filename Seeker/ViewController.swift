@@ -21,8 +21,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Core Location Manager asks for GPS location
         locManager.delegate = self
         locManager.desiredAccuracy = kCLLocationAccuracyBest
-        locManager.requestWhenInUseAuthorization()
+        locManager.requestAlwaysAuthorization()
         locManager.startMonitoringSignificantLocationChanges()
+        locManager.startUpdatingLocation()
         
         // Check if the user allowed authorization
         if   (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse ||
