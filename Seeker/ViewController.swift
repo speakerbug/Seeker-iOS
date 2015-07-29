@@ -39,13 +39,35 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView (mapView: MKMapView!,
         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
-            var pinView:MKPinAnnotationView = MKPinAnnotationView()
-            pinView.annotation = annotation
-            pinView.pinColor = MKPinAnnotationColor.Red
-            pinView.animatesDrop = true
-            pinView.canShowCallout = true
+            if !(annotation is MKPointAnnotation)
+            {
+                return nil
+            }
             
-            return pinView
+            let reuseId = "test"
+            
+            var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            
+            if anView == nil
+            {
+                anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                anView.image = UIImage(named:"pin")
+                anView.canShowCallout = true
+            }
+            else
+            {
+                anView.annotation = annotation
+            }
+            
+            return anView
+            
+//            var pinView:MKPinAnnotationView = MKPinAnnotationView()
+//            pinView.annotation = annotation
+//            pinView.pinColor = MKPinAnnotationColor.Red
+//            pinView.animatesDrop = true
+//            pinView.canShowCallout = true
+//            
+//            return pinView
     }
     
     func mapView(mapView: MKMapView!,
@@ -70,8 +92,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.mapView?.addAnnotation(pointAnnotation)
         self.mapView?.centerCoordinate = coordinates
         self.mapView?.selectAnnotation(pointAnnotation, animated: true)
-        
-        println("Added annotation to map view")
         
     }
     
@@ -118,7 +138,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.userName = json["Name"].stringValue
                 
                 var span = MKCoordinateSpanMake(0.075, 0.075)
-                var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: json["Lat"].doubleValue, longitude: json["Long"].doubleValue), span: span)
+                var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: json["Location"]["Lat"].doubleValue, longitude: json["Location"]["Long"].doubleValue), span: span)
                 self.mapView.setRegion(region, animated: true)
                 
                 println(json)
