@@ -40,7 +40,7 @@
         <!--View Controller-->
         <scene sceneID="6h9-QI-t2T">
             <objects>
-                <viewController id="4Zo-HQ-qXZ" sceneMemberID="viewController">
+                <viewController id="4Zo-HQ-qXZ" customClass="ViewController" customModule="Seeker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Gb-Lg-Arj"/>
                         <viewControllerLayoutGuide type="bottom" id="Cpc-vs-fc6"/>
@@ -54,6 +54,9 @@
                                 <state key="normal" title="Create User">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createUserButtonClicked:" destination="4Zo-HQ-qXZ" eventType="touchUpInside" id="Jiz-FE-JG4"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="akc-Hk-fC1">
                                 <rect key="frame" x="252" y="285" width="97" height="30"/>
@@ -81,6 +84,9 @@
                             <constraint firstItem="Lju-GP-yk2" firstAttribute="top" secondItem="akc-Hk-fC1" secondAttribute="bottom" constant="8" id="z1T-1U-TCh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="usernameField" destination="akc-Hk-fC1" id="Pel-p8-mga"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Drl-tE-u0S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
