@@ -17,39 +17,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lju-GP-yk2">
-                                <rect key="frame" x="259" y="323" width="82" height="30"/>
-                                <state key="normal" title="Create User">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createUserButtonClicked:" destination="4Zo-HQ-qXZ" eventType="touchUpInside" id="Jiz-FE-JG4"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="akc-Hk-fC1">
-                                <rect key="frame" x="252" y="285" width="97" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FpX-SZ-woz">
+                                <rect key="frame" x="150" y="217" width="300" height="160"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lju-GP-yk2">
+                                        <rect key="frame" x="74" y="105" width="152" height="35"/>
+                                        <color key="backgroundColor" red="0.74509803919999995" green="0.12549019610000001" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="152" id="83q-MC-118"/>
+                                            <constraint firstAttribute="height" constant="35" id="ltg-s3-Rbp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                        <state key="normal" title="Hell Ya">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="createUserButtonClicked:" destination="4Zo-HQ-qXZ" eventType="touchUpInside" id="Jiz-FE-JG4"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you ready?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBf-IH-o7g">
+                                        <rect key="frame" x="92" y="20" width="116" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="akc-Hk-fC1">
+                                        <rect key="frame" x="34" y="55" width="232" height="30"/>
+                                        <color key="backgroundColor" red="0.59215686270000001" green="0.68235294120000001" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="jhq-ES-zNb"/>
+                                            <constraint firstAttribute="width" constant="232" id="xga-PB-f1N"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.29803921568627451" green="0.29411764705882354" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="jhq-ES-zNb"/>
-                                    <constraint firstAttribute="width" constant="97" id="xga-PB-f1N"/>
+                                    <constraint firstItem="akc-Hk-fC1" firstAttribute="top" secondItem="fBf-IH-o7g" secondAttribute="bottom" constant="14" id="2FX-Tp-12G"/>
+                                    <constraint firstAttribute="width" constant="300" id="Gbn-Wj-E8E"/>
+                                    <constraint firstAttribute="centerX" secondItem="akc-Hk-fC1" secondAttribute="centerX" id="I0i-QC-8qO"/>
+                                    <constraint firstAttribute="height" constant="160" id="KTu-67-RaD"/>
+                                    <constraint firstAttribute="centerX" secondItem="fBf-IH-o7g" secondAttribute="centerX" id="OAy-5m-ory"/>
+                                    <constraint firstItem="akc-Hk-fC1" firstAttribute="top" secondItem="FpX-SZ-woz" secondAttribute="top" constant="55" id="SUR-SP-0cS"/>
+                                    <constraint firstItem="Lju-GP-yk2" firstAttribute="top" secondItem="akc-Hk-fC1" secondAttribute="bottom" constant="20" id="f4x-yz-DIv"/>
+                                    <constraint firstAttribute="centerX" secondItem="Lju-GP-yk2" secondAttribute="centerX" id="qES-1a-Pzm"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1s-74-Lye">
-                                <rect key="frame" x="227" y="202" width="146" height="30"/>
-                                <state key="normal" title="Login With Facebook">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.1215686275" green="0.1176470588" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="akc-Hk-fC1" secondAttribute="centerY" id="0XW-p8-V1S"/>
-                            <constraint firstAttribute="centerX" secondItem="Y1s-74-Lye" secondAttribute="centerX" id="BgH-6z-UHv"/>
-                            <constraint firstAttribute="centerX" secondItem="Lju-GP-yk2" secondAttribute="centerX" id="RgE-2a-Yoe"/>
-                            <constraint firstItem="Y1s-74-Lye" firstAttribute="top" secondItem="0Gb-Lg-Arj" secondAttribute="bottom" constant="182" id="V5v-Gh-RwV"/>
-                            <constraint firstAttribute="centerX" secondItem="akc-Hk-fC1" secondAttribute="centerX" id="XZE-Dy-wZ0"/>
-                            <constraint firstItem="Lju-GP-yk2" firstAttribute="top" secondItem="akc-Hk-fC1" secondAttribute="bottom" constant="8" id="z1T-1U-TCh"/>
+                            <constraint firstAttribute="centerX" secondItem="FpX-SZ-woz" secondAttribute="centerX" id="ImB-vn-PMC"/>
+                            <constraint firstAttribute="centerY" secondItem="FpX-SZ-woz" secondAttribute="centerY" constant="3" id="d9Y-Zh-u03"/>
                         </constraints>
                     </view>
                     <connections>
