@@ -31,43 +31,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locManager.startMonitoringSignificantLocationChanges()
         locManager.startUpdatingLocation()
         
-        // Check if the user allowed authorization
-        if   (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse ||
-            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
-        {
-            
-            println(locManager.location)
-            
-        }  else {
-            println("Not authorized")
-        }
-        
-        let location = "1 Infinity Loop, Cupertino, CA"
-        var geocoder:CLGeocoder = CLGeocoder()
-        geocoder.geocodeAddressString(location, completionHandler: {(placemarks, error) -> Void in
-            
-            if((error) != nil){
-                
-                println("Error", error)
-            }
-                
-            else if let placemark = placemarks?[0] as? CLPlacemark {
-                
-                var placemark:CLPlacemark = placemarks[0] as! CLPlacemark
-                var coordinates:CLLocationCoordinate2D = placemark.location.coordinate
-                
-                var pointAnnotation:MKPointAnnotation = MKPointAnnotation()
-                pointAnnotation.coordinate = coordinates
-                pointAnnotation.title = "Apple HQ"
-                
-                self.mapView?.addAnnotation(pointAnnotation)
-                self.mapView?.centerCoordinate = coordinates
-                self.mapView?.selectAnnotation(pointAnnotation, animated: true)
-                
-                println("Added annotation to map view")
-            }
-            
-        })
     }
     
     func mapView (mapView: MKMapView!,
@@ -99,6 +62,44 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var locationArray = locations as NSArray
         var locationObj = locationArray.lastObject as! CLLocation
         var coord = locationObj.coordinate
+        
+        // Check if the user allowed authorization
+        if   (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
+        {
+            println("Whaaaaa?")
+            println(manager.location.coordinate.latitude)
+            println(manager.location.coordinate.longitude)
+            
+        }  else {
+            println("Not authorized")
+        }
+        
+        let location = "1 Infinity Loop, Cupertino, CA"
+        var geocoder:CLGeocoder = CLGeocoder()
+        geocoder.geocodeAddressString(location, completionHandler: {(placemarks, error) -> Void in
+            
+            if((error) != nil){
+                
+                println("Error", error)
+            }
+                
+            else if let placemark = placemarks?[0] as? CLPlacemark {
+                
+                var placemark:CLPlacemark = placemarks[0] as! CLPlacemark
+                var coordinates:CLLocationCoordinate2D = placemark.location.coordinate
+                
+                var pointAnnotation:MKPointAnnotation = MKPointAnnotation()
+                pointAnnotation.coordinate = coordinates
+                pointAnnotation.title = "Apple HQ"
+                
+                self.mapView?.addAnnotation(pointAnnotation)
+                self.mapView?.centerCoordinate = coordinates
+                self.mapView?.selectAnnotation(pointAnnotation, animated: true)
+                
+                println("Added annotation to map view")
+            }
+            
+        })
     }
     
     override func didReceiveMemoryWarning() {
