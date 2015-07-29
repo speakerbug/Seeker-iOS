@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class LoginViewController: UIViewController {
     
@@ -29,6 +31,38 @@ class LoginViewController: UIViewController {
     
     @IBAction func createUserButtonClicked(sender: UIButton) {
         println("Create Pressed")
+        let name = usernameField.text
+        if ( name == "" ) {
+            
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Error"
+            alertView.message = "Please enter a name"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+            
+        } else {
+            
+            Alamofire.request(.POST, "https://api.friendlyu.com/v1/api.php?controller=App&action=ping", parameters: ["user":name]).responseJSON { (_, _, data, _) in
+                let json = JSON(data!)
+                if json["success"].boolValue {
+                    
+                    AuthenticationManager.sharedManager.userID = 3//json["data"]["token"].intValue;
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    
+                } else {
+                    
+                    var alertView:UIAlertView = UIAlertView()
+                    alertView.title = "Error"
+                    alertView.message = json["errormsg"].stringValue
+                    alertView.delegate = self
+                    alertView.addButtonWithTitle("OK")
+                    alertView.show()
+                    
+                }
+            }
+        }
     }
 }
+
 
