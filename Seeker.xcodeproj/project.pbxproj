@@ -14,6 +14,7 @@
 		59C413EF1B69199800C7ADC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59C413EE1B69199800C7ADC7 /* Images.xcassets */; };
 		59C413F21B69199800C7ADC7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59C413F01B69199800C7ADC7 /* LaunchScreen.xib */; };
 		59C413FE1B69199800C7ADC7 /* SeekerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C413FD1B69199800C7ADC7 /* SeekerTests.swift */; };
+		59C414081B692A8400C7ADC7 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C414071B692A8400C7ADC7 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		59C413F71B69199800C7ADC7 /* SeekerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeekerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59C413FC1B69199800C7ADC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59C413FD1B69199800C7ADC7 /* SeekerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerTests.swift; sourceTree = "<group>"; };
+		59C414071B692A8400C7ADC7 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		A87660ED232AC164BBB7183A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		ECB9C10C8266B52B3BD32D1E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 			children = (
 				59C413E71B69199800C7ADC7 /* AppDelegate.swift */,
 				59C413E91B69199800C7ADC7 /* ViewController.swift */,
+				59C414071B692A8400C7ADC7 /* AuthenticationManager.swift */,
 				59C413EB1B69199800C7ADC7 /* Main.storyboard */,
 				59C413EE1B69199800C7ADC7 /* Images.xcassets */,
 				59C413F01B69199800C7ADC7 /* LaunchScreen.xib */,
@@ -288,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59C414081B692A8400C7ADC7 /* AuthenticationManager.swift in Sources */,
 				59C413EA1B69199800C7ADC7 /* ViewController.swift in Sources */,
 				59C413E81B69199800C7ADC7 /* AppDelegate.swift in Sources */,
 			);
