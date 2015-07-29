@@ -75,6 +75,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     
+    func removeAllPins() {
+        let annotationsToRemove = mapView.annotations.filter { $0 !== self.mapView.userLocation }
+        mapView.removeAnnotations( annotationsToRemove )
+    }
+    
+    func updateLocationInAPI(coordinates:CLLocationCoordinate2D) {
+        Alamofire.request(.POST, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/location?longitude=\(coordinates.longitude)&latitude=\(coordinates.latitude)", parameters: ["get":true]).responseJSON { (_, _, data, _) in
+            
+        }
+    }
+    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var locationArray = locations as NSArray
         var locationObj = locationArray.lastObject as! CLLocation
@@ -83,8 +94,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Check if the user allowed authorization
         if   (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
         {
-            println(manager.location.coordinate.latitude)
-            println(manager.location.coordinate.longitude)
+            removeAllPins()
+            updateLocationInAPI(manager.location.coordinate)
             putPinOnMap(manager.location.coordinate)
             
         }  else {
@@ -105,6 +116,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/get", parameters: ["get":true]).responseJSON { (_, _, data, _) in
                 let json = JSON(data!)
                 self.userName = json["Name"].stringValue
+                
+                var span = MKCoordinateSpanMake(0.075, 0.075)
+                var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: json["Lat"].doubleValue, longitude: json["Long"].doubleValue), span: span)
+                self.mapView.setRegion(region, animated: true)
+                
                 println(json)
             }
         }
