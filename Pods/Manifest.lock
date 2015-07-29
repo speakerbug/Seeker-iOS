@@ -1,10 +1,26 @@
 PODS:
   - Alamofire (1.2.0)
+  - Bolts (1.2.0):
+    - Bolts/AppLinks (= 1.2.0)
+    - Bolts/Tasks (= 1.2.0)
+  - Bolts/AppLinks (1.2.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.2.0)
+  - FBSDKCoreKit (4.4.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.4.0)
+    - FBSDKCoreKit/no-arc (= 4.4.0)
+  - FBSDKCoreKit/arc (4.4.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.4.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
   - SwiftKeychainWrapper (1.0.9)
   - SwiftyJSON (2.2.1)
 
 DEPENDENCIES:
   - Alamofire (= 1.2.0)
+  - FBSDKCoreKit
   - SwiftKeychainWrapper (from `https://github.com/jrendel/SwiftKeychainWrapper.git`)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
@@ -24,6 +40,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: d765c5c1713aa64106b0228aaa600a1e6851f68d
+  Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   SwiftKeychainWrapper: 8f9c1463906ee424b788917d266d1ee32bfcb3ca
   SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
 
