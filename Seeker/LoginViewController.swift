@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  Seeker
 //
 //  Created by Henry Saniuk on 7/29/15.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class LoginViewController: UIViewController {
+    
     @IBOutlet weak var usernameField: UITextField!
     
     override func viewDidLoad() {
@@ -18,15 +18,17 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if !AuthenticationManager.sharedManager.userIsLoggedIn {
-            self.performSegueWithIdentifier("showLogin", sender: self)
-        }
+        super.viewDidAppear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    
+    @IBAction func createUserButtonClicked(sender: UIButton) {
+        println("Create Pressed")
+    }
 }
 

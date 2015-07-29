@@ -37,10 +37,10 @@
             </objects>
             <point key="canvasLocation" x="354" y="560"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="6h9-QI-t2T">
             <objects>
-                <viewController id="4Zo-HQ-qXZ" customClass="ViewController" customModule="Seeker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4Zo-HQ-qXZ" customClass="LoginViewController" customModule="Seeker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Gb-Lg-Arj"/>
                         <viewControllerLayoutGuide type="bottom" id="Cpc-vs-fc6"/>
