@@ -30,7 +30,6 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func createUserButtonClicked(sender: UIButton) {
-        println("Create Pressed")
         let name = usernameField.text
         if ( name == "" ) {
             
@@ -43,23 +42,10 @@ class LoginViewController: UIViewController {
             
         } else {
             
-            Alamofire.request(.POST, "https://api.friendlyu.com/v1/api.php?controller=App&action=ping", parameters: ["user":name]).responseJSON { (_, _, data, _) in
+            Alamofire.request(.POST, "http://seeker.henrysaniuk.com:9002/api/user/new", parameters: ["name":"test"]).responseJSON { (_, _, data, _) in
                 let json = JSON(data!)
-                if json["success"].boolValue {
-                    
-                    AuthenticationManager.sharedManager.userID = 3//json["data"]["token"].intValue;
+                    AuthenticationManager.sharedManager.userID = json.intValue;
                     self.dismissViewControllerAnimated(true, completion: nil)
-                    
-                } else {
-                    
-                    var alertView:UIAlertView = UIAlertView()
-                    alertView.title = "Error"
-                    alertView.message = json["errormsg"].stringValue
-                    alertView.delegate = self
-                    alertView.addButtonWithTitle("OK")
-                    alertView.show()
-                    
-                }
             }
         }
     }
