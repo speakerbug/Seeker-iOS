@@ -1,0 +1,30 @@
+PODS:
+  - Alamofire (1.2.0)
+  - SwiftKeychainWrapper (1.0.9)
+  - SwiftyJSON (2.2.1)
+
+DEPENDENCIES:
+  - Alamofire (= 1.2.0)
+  - SwiftKeychainWrapper (from `https://github.com/jrendel/SwiftKeychainWrapper.git`)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+
+EXTERNAL SOURCES:
+  SwiftKeychainWrapper:
+    :git: https://github.com/jrendel/SwiftKeychainWrapper.git
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftKeychainWrapper:
+    :commit: 2f69ab859cb757e8fdb8039d578405ddb5b2e4ba
+    :git: https://github.com/jrendel/SwiftKeychainWrapper.git
+  SwiftyJSON:
+    :commit: dd9551eab0d09026676a57a0e0fd762af8465f03
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+SPEC CHECKSUMS:
+  Alamofire: d765c5c1713aa64106b0228aaa600a1e6851f68d
+  SwiftKeychainWrapper: 8f9c1463906ee424b788917d266d1ee32bfcb3ca
+  SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
+
+COCOAPODS: 0.38.2
