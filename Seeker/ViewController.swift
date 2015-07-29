@@ -13,7 +13,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        println(AuthenticationManager.sharedManager.userIsLoggedIn)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if !AuthenticationManager.sharedManager.userIsLoggedIn {
+            self.performSegueWithIdentifier("showLogin", sender: self)
+        }
     }
 
     override func didReceiveMemoryWarning() {

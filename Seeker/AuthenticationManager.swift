@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class AuthenticationManager: NSObject {
     
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -21,7 +20,6 @@ class AuthenticationManager: NSObject {
     class var sharedManager: AuthenticationManager {
         return Constants.sharedManager
     }
-    
     
     var userID: Int {
         get {
