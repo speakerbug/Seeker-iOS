@@ -9,11 +9,14 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     let locManager = CLLocationManager()
+    var userName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +61,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    func putPinOnMap(coordinates:CLLocationCoordinate2D) {
+        
+        var pointAnnotation:MKPointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = coordinates
+        pointAnnotation.title = userName
+        
+        self.mapView?.addAnnotation(pointAnnotation)
+        self.mapView?.centerCoordinate = coordinates
+        self.mapView?.selectAnnotation(pointAnnotation, animated: true)
+        
+        println("Added annotation to map view")
+        
+    }
+    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var locationArray = locations as NSArray
         var locationObj = locationArray.lastObject as! CLLocation
@@ -66,40 +83,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Check if the user allowed authorization
         if   (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
         {
-            println("Whaaaaa?")
             println(manager.location.coordinate.latitude)
             println(manager.location.coordinate.longitude)
+            putPinOnMap(manager.location.coordinate)
             
         }  else {
             println("Not authorized")
         }
         
-        let location = "1 Infinity Loop, Cupertino, CA"
-        var geocoder:CLGeocoder = CLGeocoder()
-        geocoder.geocodeAddressString(location, completionHandler: {(placemarks, error) -> Void in
-            
-            if((error) != nil){
-                
-                println("Error", error)
-            }
-                
-            else if let placemark = placemarks?[0] as? CLPlacemark {
-                
-                var placemark:CLPlacemark = placemarks[0] as! CLPlacemark
-                var coordinates:CLLocationCoordinate2D = placemark.location.coordinate
-                
-                var pointAnnotation:MKPointAnnotation = MKPointAnnotation()
-                pointAnnotation.coordinate = coordinates
-                pointAnnotation.title = "Apple HQ"
-                
-                self.mapView?.addAnnotation(pointAnnotation)
-                self.mapView?.centerCoordinate = coordinates
-                self.mapView?.selectAnnotation(pointAnnotation, animated: true)
-                
-                println("Added annotation to map view")
-            }
-            
-        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,8 +101,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func viewDidAppear(animated: Bool) {
         if !AuthenticationManager.sharedManager.userIsLoggedIn {
             self.performSegueWithIdentifier("showLogin", sender: self)
+        } else {
+            Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/get", parameters: ["get":true]).responseJSON { (_, _, data, _) in
+                let json = JSON(data!)
+                self.userName = json["Name"].stringValue
+                println(json)
+            }
         }
     }
-
+    
 }
 
