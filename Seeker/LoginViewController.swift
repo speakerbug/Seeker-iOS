@@ -42,8 +42,9 @@ class LoginViewController: UIViewController {
             
         } else {
             
-            Alamofire.request(.POST, "http://seeker.henrysaniuk.com:9002/api/user/new", parameters: ["name":"test"]).responseJSON { (_, _, data, _) in
+            Alamofire.request(.POST, "http://seeker.henrysaniuk.com:9002/api/user/new?name=\(name)", parameters: ["create":true]).responseJSON { (_, _, data, _) in
                 let json = JSON(data!)
+                    println(json)
                     AuthenticationManager.sharedManager.userID = json.intValue;
                     self.dismissViewControllerAnimated(true, completion: nil)
             }
