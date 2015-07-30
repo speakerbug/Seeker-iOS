@@ -20,10 +20,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var isTagged = false
     var seekers = [Seeker]()
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
-    var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: refresh(), userInfo: nil, repeats: true)
+    var timer:NSTimer = NSTimer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let aSelector : Selector = "refresh"
+        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 41/255, green: 40/255, blue: 38/255, alpha: 1)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -115,7 +118,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     (alert: UIAlertAction!) -> Void in
                     println("Just tagged \(player.name)")
                     self.tag(player)
-
+                    
                 })
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
                     (alert: UIAlertAction!) -> Void in
@@ -185,16 +188,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func getSelf() {
-        Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/get", parameters: ["get":true]).responseJSON { (_, _, data, _) in
-            let json = JSON(data!)
-            self.userName = json["Name"].stringValue
-            self.isTagged = json["isTagged"].boolValue
-            if json["isTagged"].boolValue {
-                self.title = "You're it!"
-            } else {
-                self.title = "Don't get tagged!"
+        
+        if AuthenticationManager.sharedManager.userIsLoggedIn {
+            Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/get", parameters: ["get":true]).responseJSON { (_, _, data, _) in
+                let json = JSON(data!)
+                self.userName = json["Name"].stringValue
+                self.isTagged = json["isTagged"].boolValue
+                if json["isTagged"].boolValue {
+                    self.title = "You're it!"
+                } else {
+                    self.title = "Don't get tagged!"
+                }
+                
             }
-            
         }
         
     }
