@@ -32,11 +32,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         // Core Location Manager asks for GPS location
         locManager.delegate = self
-        locManager.desiredAccuracy = kCLLocationAccuracyBest
+        locManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locManager.requestAlwaysAuthorization()
         locManager.startMonitoringSignificantLocationChanges()
         locManager.startUpdatingLocation()
         mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
+        mapView.delegate = self
     }
     
     func mapView (mapView: MKMapView!,
@@ -44,10 +45,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             var pinView:MKPinAnnotationView = MKPinAnnotationView()
             pinView.annotation = annotation
-            pinView.pinColor = MKPinAnnotationColor.Red
-            pinView.animatesDrop = true
-            pinView.canShowCallout = true
+            if (annotation.title! == "Current Location") {
+                pinView.pinColor = MKPinAnnotationColor.Purple
+            } else if annotation.title! == "Tagger" {
+                pinView.pinColor = MKPinAnnotationColor.Red
+            } else {
+                pinView.pinColor = MKPinAnnotationColor.Green
+            }
             
+            //pinView.animatesDrop = true
+            //pinView.canShowCallout = true
             return pinView
     }
     
@@ -72,7 +79,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var pointAnnotation:MKPointAnnotation = MKPointAnnotation()
         pointAnnotation.coordinate = coordinates
         if player.isTagged{
-            pointAnnotation.title = "It"
+            pointAnnotation.title = "Tagger"
+        } else {
+            pointAnnotation.title = player.name
         }
         self.mapView?.addAnnotation(pointAnnotation)
         //self.mapView?.centerCoordinate = coordinates
@@ -94,7 +103,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let newLocation: CLLocation =  CLLocation(latitude: player.lat, longitude: player.long)
             let distance = getCurrentLocation().distanceFromLocation(newLocation)
             
-            if distance <= 8 && isTagged {
+            if distance <= 30 && isTagged {
                 
                 println(currentLocation)
                 println(distance)
