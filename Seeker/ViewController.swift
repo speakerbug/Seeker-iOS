@@ -17,7 +17,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var mapView: MKMapView!
     let locManager = CLLocationManager()
     var userName = ""
+    var isTagged = false
     var seekers = [Seeker]()
+    var currentLocation = CLLocation(latitude: 0, longitude: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +53,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func mapView(mapView: MKMapView!,
         didSelectAnnotationView view: MKAnnotationView!){
-            
             println("Selected annotation")
     }
     
@@ -60,6 +61,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if ((error) != nil) {
             print(error)
         }
+    }
+    
+    func getCurrentLocation() -> CLLocation {
+        return currentLocation
     }
     
     func putPinOnMap(coordinates:CLLocationCoordinate2D, player: Seeker) {
@@ -85,16 +90,45 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             var coordinates = CLLocationCoordinate2D(latitude: player.lat as
                 CLLocationDegrees, longitude: player.long as CLLocationDegrees)
             putPinOnMap(coordinates, player: player)
+            
+            let newLocation: CLLocation =  CLLocation(latitude: player.lat, longitude: player.long)
+            let distance = getCurrentLocation().distanceFromLocation(newLocation)
+            
+            if distance <= 8 && isTagged {
+                
+                println(currentLocation)
+                println(distance)
+                
+                //give user ability to tag the close user
+                let optionMenu = UIAlertController(title: nil, message: "You are close enough to tag \(player.name)", preferredStyle: .ActionSheet)
+                let tagAction = UIAlertAction(title: "Tag them!", style: .Default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    println("Just tagged \(player.name)")
+                })
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    println("Cancelled tag")
+                })
+                optionMenu.addAction(tagAction)
+                optionMenu.addAction(cancelAction)
+                self.presentViewController(optionMenu, animated: true, completion: nil)
+                
+            }
+            
         }
     }
     
     func updateLocationInAPI(coordinates:CLLocationCoordinate2D) {
+        
+        currentLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        
         Alamofire.request(.POST, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/location?longitude=\(coordinates.longitude)&latitude=\(coordinates.latitude)", parameters: ["get":true]).responseJSON { (_, _, data, _) in
         }
     }
     
     @IBAction func refreshPinsButton(sender: AnyObject) {
         refreshPins()
+        getSelf()
     }
     
     func refreshPins() {
@@ -131,21 +165,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Dispose of any resources that can be recreated.
     }
     
+    func getSelf() {
+        Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/get", parameters: ["get":true]).responseJSON { (_, _, data, _) in
+            let json = JSON(data!)
+            self.userName = json["Name"].stringValue
+            self.isTagged = json["isTagged"].boolValue
+            if json["isTagged"].boolValue {
+                self.title = "You're it!"
+            } else {
+                self.title = "Don't get tagged!"
+            }
+            
+        }
+        
+    }
+    
     override func viewDidAppear(animated: Bool) {
         if !AuthenticationManager.sharedManager.userIsLoggedIn {
             self.performSegueWithIdentifier("showLogin", sender: self)
         } else {
-            Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/get", parameters: ["get":true]).responseJSON { (_, _, data, _) in
-                let json = JSON(data!)
-                self.userName = json["Name"].stringValue
-                if json["isTagged"].boolValue {
-                    self.title = "You're it!"
-                } else {
-                    self.title = "Don't get tagged!"
-                }
-                println(json)
-                
-            }
+            getSelf()
         }
     }
     
