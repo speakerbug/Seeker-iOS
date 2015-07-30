@@ -50,14 +50,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             var pinView:MKPinAnnotationView = MKPinAnnotationView()
             pinView.annotation = annotation
             if (annotation.title! == "Current Location") {
-                pinView.pinColor = MKPinAnnotationColor.Purple
+                //Set image below for the current user
+                pinView.image = UIImage(named:"zombie")
             } else if annotation.title! == "Tagger" {
-                pinView.pinColor = MKPinAnnotationColor.Red
+                //set image below for zombies
+                pinView.image = UIImage(named:"zombie")
             } else {
-                pinView.pinColor = MKPinAnnotationColor.Green
+                //set image below for humans
+                pinView.image = UIImage(named:"zombie")
             }
-            
-            pinView.image = UIImage(named:"pin")
             
             //pinView.animatesDrop = true
             //pinView.canShowCallout = true
@@ -201,7 +202,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 } else {
                     self.title = "Don't get tagged!"
                 }
-                
             }
         }
         
