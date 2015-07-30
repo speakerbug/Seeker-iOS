@@ -33,6 +33,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locManager.requestAlwaysAuthorization()
         locManager.startMonitoringSignificantLocationChanges()
         locManager.startUpdatingLocation()
+        mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
         
     }
     
@@ -115,9 +116,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if   (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
         {
 //            removeAllPins()
-//            updateLocationInAPI(manager.location.coordinate)
+            updateLocationInAPI(manager.location.coordinate)
 //            putPinOnMap(manager.location.coordinate)
-            mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
             
         }  else {
             println("Not authorized")
