@@ -57,6 +57,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 pinView.pinColor = MKPinAnnotationColor.Green
             }
             
+            pinView.image = UIImage(named:"pin")
+            
             //pinView.animatesDrop = true
             //pinView.canShowCallout = true
             return pinView
@@ -104,7 +106,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 CLLocationDegrees, longitude: player.long as CLLocationDegrees)
             putPinOnMap(coordinates, player: player)
             
-            let newLocation: CLLocation =  CLLocation(latitude: player.lat, longitude: player.long)
+            let newLocation: CLLocation = CLLocation(latitude: player.lat, longitude: player.long)
             let distance = getCurrentLocation().distanceFromLocation(newLocation)
             
             if distance <= 30 && isTagged && !player.isTagged {
