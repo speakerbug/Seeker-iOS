@@ -20,6 +20,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var isTagged = false
     var seekers = [Seeker]()
     var currentLocation = CLLocation(latitude: 0, longitude: 0)
+    var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: refresh(), userInfo: nil, repeats: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +114,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 let tagAction = UIAlertAction(title: "Tag them!", style: .Default, handler: {
                     (alert: UIAlertAction!) -> Void in
                     println("Just tagged \(player.name)")
+                    self.tag(player)
+
                 })
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
                     (alert: UIAlertAction!) -> Void in
@@ -136,6 +139,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     @IBAction func refreshPinsButton(sender: AnyObject) {
+        refresh()
+    }
+    
+    func refresh() {
         refreshPins()
         getSelf()
     }
@@ -197,5 +204,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    func tag(player: Seeker){
+        Alamofire.request(.POST, "http://seeker.henrysaniuk.com:9002/api/user/\(player.id)/tag", parameters: ["get":true]).responseJSON { (_, _, data, _) in
+        }
+    }
 }
 
