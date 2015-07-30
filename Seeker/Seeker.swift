@@ -14,19 +14,22 @@ class Seeker {
     let name: String
     let long: Double
     let lat: Double
+    let isTagged: Bool
     
     convenience init(json: JSON) {
         let id = json["Id"].intValue
         let name = json["Name"].stringValue
-        let long = json["Long"].doubleValue
-        let lat = json["Lat"].doubleValue
-        self.init(id: id, name: name, long: long, lat: lat)
+        let long = json["Location"]["Long"].doubleValue
+        let lat = json["Location"]["Lat"].doubleValue
+        let isTagged = json["isTagged"].boolValue
+        self.init(id: id, name: name, long: long, lat: lat, isTagged: isTagged)
     }
     
-    init(id: Int, name: String, long: Double, lat: Double) {
+    init(id: Int, name: String, long: Double, lat: Double, isTagged: Bool) {
         self.id = id
         self.name = name
         self.long = long
         self.lat = lat
+        self.isTagged = isTagged
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SettingsViewController: UIViewController {
     
@@ -26,9 +27,12 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func logoutUser(sender: UIButton) {
-        AuthenticationManager.sharedManager.logoutUser()
-        self.performSegueWithIdentifier("showLogin", sender: self)
-        
+        Alamofire.request(.POST, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/delete", parameters: ["delete":true]).responseJSON { (_, _, data, _) in
+            
+            AuthenticationManager.sharedManager.logoutUser()
+            self.performSegueWithIdentifier("showLogin", sender: self)
+            
+        }
     }
 }
 

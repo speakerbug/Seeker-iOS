@@ -40,35 +40,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView (mapView: MKMapView!,
         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
-//            if !(annotation is MKPointAnnotation)
-//            {
-//                return nil
-//            }
-//            
-//            let reuseId = "test"
-//            
-//            var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-//            
-//            if anView == nil
-//            {
-//                anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-//                anView.image = UIImage(named:"pin")
-//                anView.canShowCallout = true
-//            }
-//            else
-//            {
-//                anView.annotation = annotation
-//            }
-//            
-//            return anView
+            var pinView:MKPinAnnotationView = MKPinAnnotationView()
+            pinView.annotation = annotation
+            pinView.pinColor = MKPinAnnotationColor.Red
+            pinView.animatesDrop = true
+            pinView.canShowCallout = true
             
-                        var pinView:MKPinAnnotationView = MKPinAnnotationView()
-                        //pinView.annotation = annotation
-                        pinView.pinColor = MKPinAnnotationColor.Red
-                        pinView.animatesDrop = true
-                        //pinView.canShowCallout = true
-            
-                        return pinView
+            return pinView
     }
     
     func mapView(mapView: MKMapView!,
@@ -84,14 +62,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-    func putPinOnMap(coordinates:CLLocationCoordinate2D) {
+    func putPinOnMap(coordinates:CLLocationCoordinate2D, player: Seeker) {
         
         var pointAnnotation:MKPointAnnotation = MKPointAnnotation()
         pointAnnotation.coordinate = coordinates
-        pointAnnotation.title = userName
-        
+        if player.isTagged{
+            pointAnnotation.title = "It"
+        }
         self.mapView?.addAnnotation(pointAnnotation)
-        self.mapView?.centerCoordinate = coordinates
+        //self.mapView?.centerCoordinate = coordinates
         self.mapView?.selectAnnotation(pointAnnotation, animated: true)
         
     }
@@ -105,7 +84,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         for player in seekers {
             var coordinates = CLLocationCoordinate2D(latitude: player.lat as
                 CLLocationDegrees, longitude: player.long as CLLocationDegrees)
-            putPinOnMap(coordinates)
+            putPinOnMap(coordinates, player: player)
         }
     }
     
@@ -116,17 +95,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBAction func refreshPinsButton(sender: AnyObject) {
         refreshPins()
-        placeAllPins()
     }
     
     func refreshPins() {
-        Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/locations", parameters: ["get":true]).responseJSON { (_, _, data, _) in
+        Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/others", parameters: ["get":true]).responseJSON { (_, _, data, _) in
             if let data: AnyObject = data {
                 let json = JSON(data)
                 let array = json.arrayValue
                 self.seekers = array.map {
                     Seeker(json: $0)
                 }
+                self.removeAllPins()
+                self.placeAllPins()
             }
         }
     }
@@ -139,10 +119,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Check if the user allowed authorization
         if   (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
         {
-            //            removeAllPins()
             updateLocationInAPI(manager.location.coordinate)
-            //            putPinOnMap(manager.location.coordinate)
-            
         }  else {
             println("Not authorized")
         }
@@ -161,16 +138,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/get", parameters: ["get":true]).responseJSON { (_, _, data, _) in
                 let json = JSON(data!)
                 self.userName = json["Name"].stringValue
-                
-//                var span = MKCoordinateSpanMake(0.075, 0.075)
-//                var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: json["Location"]["Lat"].doubleValue, longitude: json["Location"]["Long"].doubleValue), span: span)
-//                self.mapView.setRegion(region, animated: true)
-                
+                if json["isTagged"].boolValue {
+                    self.title = "You're it!"
+                } else {
+                    self.title = "Don't get tagged!"
+                }
                 println(json)
-                
-                //show other players
-                self.refreshPins()
-                self.placeAllPins()
                 
             }
         }
