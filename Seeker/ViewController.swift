@@ -107,7 +107,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let newLocation: CLLocation =  CLLocation(latitude: player.lat, longitude: player.long)
             let distance = getCurrentLocation().distanceFromLocation(newLocation)
             
-            if distance <= 30 && isTagged {
+            if distance <= 30 && isTagged && !player.isTagged {
                 
                 println(currentLocation)
                 println(distance)
