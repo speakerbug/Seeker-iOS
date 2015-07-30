@@ -17,4 +17,3 @@ Afterwards, open up the `Seeker.xcworkspace` file in Xcode
 * Christine Perinchery ([github.com/cvperinchery](https://github.com/cvperinchery))
 * Andrew Glaude ([github.com/ajgajg1134](https://github.com/ajgajg1134))
 * Michael Jensen ([github.com/majense77](https://github.com/majense77))
-* Val Booth ([github.com/valbooth28](https://github.com/valbooth28))
