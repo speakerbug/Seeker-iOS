@@ -17,6 +17,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var mapView: MKMapView!
     let locManager = CLLocationManager()
     var userName = ""
+    var seekers = [Seeker]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,35 +40,35 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView (mapView: MKMapView!,
         viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
-            if !(annotation is MKPointAnnotation)
-            {
-                return nil
-            }
-            
-            let reuseId = "test"
-            
-            var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-            
-            if anView == nil
-            {
-                anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                anView.image = UIImage(named:"pin")
-                anView.canShowCallout = true
-            }
-            else
-            {
-                anView.annotation = annotation
-            }
-            
-            return anView
-            
-//            var pinView:MKPinAnnotationView = MKPinAnnotationView()
-//            pinView.annotation = annotation
-//            pinView.pinColor = MKPinAnnotationColor.Red
-//            pinView.animatesDrop = true
-//            pinView.canShowCallout = true
+//            if !(annotation is MKPointAnnotation)
+//            {
+//                return nil
+//            }
 //            
-//            return pinView
+//            let reuseId = "test"
+//            
+//            var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+//            
+//            if anView == nil
+//            {
+//                anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//                anView.image = UIImage(named:"pin")
+//                anView.canShowCallout = true
+//            }
+//            else
+//            {
+//                anView.annotation = annotation
+//            }
+//            
+//            return anView
+            
+                        var pinView:MKPinAnnotationView = MKPinAnnotationView()
+                        //pinView.annotation = annotation
+                        pinView.pinColor = MKPinAnnotationColor.Red
+                        pinView.animatesDrop = true
+                        //pinView.canShowCallout = true
+            
+                        return pinView
     }
     
     func mapView(mapView: MKMapView!,
@@ -100,9 +101,33 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.removeAnnotations( annotationsToRemove )
     }
     
+    func placeAllPins() {
+        for player in seekers {
+            var coordinates = CLLocationCoordinate2D(latitude: player.lat as
+                CLLocationDegrees, longitude: player.long as CLLocationDegrees)
+            putPinOnMap(coordinates)
+        }
+    }
+    
     func updateLocationInAPI(coordinates:CLLocationCoordinate2D) {
         Alamofire.request(.POST, "http://seeker.henrysaniuk.com:9002/api/user/\(AuthenticationManager.sharedManager.userID)/location?longitude=\(coordinates.longitude)&latitude=\(coordinates.latitude)", parameters: ["get":true]).responseJSON { (_, _, data, _) in
-            
+        }
+    }
+    
+    @IBAction func refreshPinsButton(sender: AnyObject) {
+        refreshPins()
+        placeAllPins()
+    }
+    
+    func refreshPins() {
+        Alamofire.request(.GET, "http://seeker.henrysaniuk.com:9002/api/user/locations", parameters: ["get":true]).responseJSON { (_, _, data, _) in
+            if let data: AnyObject = data {
+                let json = JSON(data)
+                let array = json.arrayValue
+                self.seekers = array.map {
+                    Seeker(json: $0)
+                }
+            }
         }
     }
     
@@ -114,9 +139,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Check if the user allowed authorization
         if   (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways)
         {
-//            removeAllPins()
+            //            removeAllPins()
             updateLocationInAPI(manager.location.coordinate)
-//            putPinOnMap(manager.location.coordinate)
+            //            putPinOnMap(manager.location.coordinate)
             
         }  else {
             println("Not authorized")
@@ -137,11 +162,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 let json = JSON(data!)
                 self.userName = json["Name"].stringValue
                 
-                var span = MKCoordinateSpanMake(0.075, 0.075)
-                var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: json["Location"]["Lat"].doubleValue, longitude: json["Location"]["Long"].doubleValue), span: span)
-                self.mapView.setRegion(region, animated: true)
+//                var span = MKCoordinateSpanMake(0.075, 0.075)
+//                var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: json["Location"]["Lat"].doubleValue, longitude: json["Location"]["Long"].doubleValue), span: span)
+//                self.mapView.setRegion(region, animated: true)
                 
                 println(json)
+                
+                //show other players
+                self.refreshPins()
+                self.placeAllPins()
+                
             }
         }
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		10B19F51D31F15DE166FAB17 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA7050532232BB514C470F1 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		541E8B131B6A788400AA8453 /* Seeker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541E8B121B6A788400AA8453 /* Seeker.swift */; };
 		59C413E81B69199800C7ADC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C413E71B69199800C7ADC7 /* AppDelegate.swift */; };
 		59C413EA1B69199800C7ADC7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C413E91B69199800C7ADC7 /* ViewController.swift */; };
 		59C413ED1B69199800C7ADC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59C413EB1B69199800C7ADC7 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		3CA7050532232BB514C470F1 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		541E8B121B6A788400AA8453 /* Seeker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeker.swift; sourceTree = "<group>"; };
 		59C413E21B69199800C7ADC7 /* Seeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seeker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59C413E61B69199800C7ADC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59C413E71B69199800C7ADC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				59C414091B69351000C7ADC7 /* Bridging-Header.h */,
 				59C413E91B69199800C7ADC7 /* ViewController.swift */,
 				59C4140A1B693AA100C7ADC7 /* LoginViewController.swift */,
+				541E8B121B6A788400AA8453 /* Seeker.swift */,
 				59C4140C1B6948FF00C7ADC7 /* SettingsViewController.swift */,
 				59C414071B692A8400C7ADC7 /* AuthenticationManager.swift */,
 				59C413EB1B69199800C7ADC7 /* Main.storyboard */,
@@ -303,6 +306,7 @@
 				59C414081B692A8400C7ADC7 /* AuthenticationManager.swift in Sources */,
 				59C413EA1B69199800C7ADC7 /* ViewController.swift in Sources */,
 				59C4140D1B6948FF00C7ADC7 /* SettingsViewController.swift in Sources */,
+				541E8B131B6A788400AA8453 /* Seeker.swift in Sources */,
 				59C413E81B69199800C7ADC7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
