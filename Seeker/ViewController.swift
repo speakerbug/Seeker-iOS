@@ -120,6 +120,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 })
                 optionMenu.addAction(tagAction)
                 optionMenu.addAction(cancelAction)
+                
+                optionMenu.popoverPresentationController?.sourceView = mapView
+                
                 self.presentViewController(optionMenu, animated: true, completion: nil)
                 
             }
