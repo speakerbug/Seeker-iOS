@@ -34,7 +34,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locManager.startMonitoringSignificantLocationChanges()
         locManager.startUpdatingLocation()
         mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
-        
     }
     
     func mapView (mapView: MKMapView!,
