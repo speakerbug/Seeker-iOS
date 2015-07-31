@@ -43,6 +43,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locManager.requestAlwaysAuthorization()
         locManager.startMonitoringSignificantLocationChanges()
         locManager.startUpdatingLocation()
+        mapView.showsUserLocation = true
         mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true)
         mapView.delegate = self
     }
@@ -53,12 +54,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             var pinView:MKPinAnnotationView = MKPinAnnotationView()
             pinView.annotation = annotation
             if (annotation.title! == "Current Location") {
+                pinView.image = UIImage(named:"user_dot")
                 //Set image below for the current user
-                if isTagged {
-                    pinView.image = UIImage(named:"self_zombie_icon")
-                } else {
-                    pinView.image = UIImage(named:"self_human_icon")
-                }
+//                if isTagged {
+//                    pinView.image = UIImage(named:"self_zombie_icon")
+//                } else {
+//                    pinView.image = UIImage(named:"self_human_icon")
+//                }
             } else if annotation.title! == "Tagger" {
                 //set image below for zombies
                 pinView.image = UIImage(named:"zombie_icon")
@@ -202,6 +204,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 let json = JSON(data!)
                 self.userName = json["Name"].stringValue
                 self.isTagged = json["isTagged"].boolValue
+                println(self.isTagged)
                 if json["isTagged"].boolValue {
 //                    self.title = "You're it!"
                     UIView.animateWithDuration(0.7, animations: {
