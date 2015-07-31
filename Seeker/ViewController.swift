@@ -54,13 +54,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             pinView.annotation = annotation
             if (annotation.title! == "Current Location") {
                 //Set image below for the current user
-                pinView.image = UIImage(named:"zombie")
+                if isTagged {
+                    pinView.image = UIImage(named:"self_zombie_icon")
+                } else {
+                    pinView.image = UIImage(named:"self_human_icon")
+                }
             } else if annotation.title! == "Tagger" {
                 //set image below for zombies
-                pinView.image = UIImage(named:"zombie")
+                pinView.image = UIImage(named:"zombie_icon")
             } else {
                 //set image below for humans
-                pinView.image = UIImage(named:"zombie")
+                pinView.image = UIImage(named:"human_icon")
             }
             //pinView.animatesDrop = true
             //pinView.canShowCallout = true
