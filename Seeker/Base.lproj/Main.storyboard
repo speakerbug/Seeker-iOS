@@ -35,7 +35,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lju-GP-yk2">
-                                <rect key="frame" x="197" y="442" width="207" height="130"/>
+                                <rect key="frame" x="197" y="379" width="207" height="130"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
                                 </accessibility>
@@ -57,7 +57,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" alpha="0.44999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Name   " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="akc-Hk-fC1">
-                                <rect key="frame" x="199" y="354" width="232" height="30"/>
+                                <rect key="frame" x="199" y="299" width="232" height="30"/>
                                 <color key="backgroundColor" red="0.59215686270000001" green="0.68235294120000001" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="jhq-ES-zNb"/>
@@ -68,7 +68,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bullet" translatesAutoresizingMaskIntoConstraints="NO" id="Hy2-Jk-Ipq">
-                                <rect key="frame" x="125" y="313" width="100" height="100"/>
+                                <rect key="frame" x="125" y="258" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Os4-9J-DVa"/>
                                     <constraint firstAttribute="width" secondItem="Hy2-Jk-Ipq" secondAttribute="height" multiplier="1:1" id="w5V-gi-y2l"/>
@@ -89,6 +89,7 @@
                             <constraint firstItem="uWN-VC-jQp" firstAttribute="top" secondItem="0Gb-Lg-Arj" secondAttribute="bottom" multiplier="2.5" id="UbS-mk-mwx"/>
                             <constraint firstAttribute="centerY" secondItem="cmA-nb-dzD" secondAttribute="centerY" id="VIN-O0-wsK"/>
                             <constraint firstAttribute="centerX" secondItem="Lju-GP-yk2" secondAttribute="centerX" constant="208.5" id="Whz-ha-huc"/>
+                            <constraint firstItem="akc-Hk-fC1" firstAttribute="top" secondItem="uWN-VC-jQp" secondAttribute="bottom" constant="75" id="a7v-HX-rTR"/>
                             <constraint firstAttribute="centerX" secondItem="Lju-GP-yk2" secondAttribute="centerX" id="hPr-Ie-SSM"/>
                             <constraint firstAttribute="centerX" secondItem="cmA-nb-dzD" secondAttribute="centerX" id="rgk-CK-xZ7"/>
                             <constraint firstItem="cmA-nb-dzD" firstAttribute="height" secondItem="g8v-qR-8SG" secondAttribute="height" id="snf-ne-u6R"/>
@@ -98,6 +99,7 @@
                                 <exclude reference="RVq-gk-Hkt"/>
                                 <exclude reference="VIN-O0-wsK"/>
                                 <exclude reference="Whz-ha-huc"/>
+                                <exclude reference="F6Z-f9-BwI"/>
                             </mask>
                         </variation>
                     </view>
