@@ -18,6 +18,8 @@
 		59C414081B692A8400C7ADC7 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C414071B692A8400C7ADC7 /* AuthenticationManager.swift */; };
 		59C4140B1B693AA100C7ADC7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C4140A1B693AA100C7ADC7 /* LoginViewController.swift */; };
 		59C4140D1B6948FF00C7ADC7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C4140C1B6948FF00C7ADC7 /* SettingsViewController.swift */; };
+		5AA9DDE81B6AE9C0006091E7 /* Da_Streets.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5AA9DDE61B6AE9C0006091E7 /* Da_Streets.ttf */; };
+		5AA9DDE91B6AE9C0006091E7 /* Verlag Compressed Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5AA9DDE71B6AE9C0006091E7 /* Verlag Compressed Book.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		59C414091B69351000C7ADC7 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		59C4140A1B693AA100C7ADC7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		59C4140C1B6948FF00C7ADC7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5AA9DDE61B6AE9C0006091E7 /* Da_Streets.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Da_Streets.ttf; path = Fonts/Da_Streets.ttf; sourceTree = "<group>"; };
+		5AA9DDE71B6AE9C0006091E7 /* Verlag Compressed Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Verlag Compressed Book.otf"; path = "Fonts/Verlag Compressed Book.otf"; sourceTree = "<group>"; };
 		A87660ED232AC164BBB7183A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		ECB9C10C8266B52B3BD32D1E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +97,7 @@
 		59C413E41B69199800C7ADC7 /* Seeker */ = {
 			isa = PBXGroup;
 			children = (
+				5AA9DDE51B6AE9AB006091E7 /* Fonts */,
 				59C413E71B69199800C7ADC7 /* AppDelegate.swift */,
 				59C414091B69351000C7ADC7 /* Bridging-Header.h */,
 				59C413E91B69199800C7ADC7 /* ViewController.swift */,
@@ -131,6 +136,15 @@
 				59C413FC1B69199800C7ADC7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5AA9DDE51B6AE9AB006091E7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5AA9DDE61B6AE9C0006091E7 /* Da_Streets.ttf */,
+				5AA9DDE71B6AE9C0006091E7 /* Verlag Compressed Book.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		97EE7F3CE1A06F463DE1D1C0 /* Frameworks */ = {
@@ -234,9 +248,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AA9DDE81B6AE9C0006091E7 /* Da_Streets.ttf in Resources */,
 				59C413ED1B69199800C7ADC7 /* Main.storyboard in Resources */,
 				59C413F21B69199800C7ADC7 /* LaunchScreen.xib in Resources */,
 				59C413EF1B69199800C7ADC7 /* Images.xcassets in Resources */,
+				5AA9DDE91B6AE9C0006091E7 /* Verlag Compressed Book.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,9 @@ import SwiftyJSON
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var stateLabel: UIImageView!
+    @IBOutlet weak var vignette: UIImageView!
+    @IBOutlet weak var scratches: UIImageView!
     let locManager = CLLocationManager()
     var userName = ""
     var isTagged = false
@@ -28,7 +31,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let aSelector : Selector = "refresh"
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 41/255, green: 40/255, blue: 38/255, alpha: 1)
+//        self.navigationController?.navigationBar.barTintColor = UIColor(red: 41/255, green: 40/255, blue: 38/255, alpha: 1)
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
@@ -198,9 +201,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.userName = json["Name"].stringValue
                 self.isTagged = json["isTagged"].boolValue
                 if json["isTagged"].boolValue {
-                    self.title = "You're it!"
+//                    self.title = "You're it!"
+                    UIView.animateWithDuration(0.7, animations: {
+                        self.vignette.alpha = 1
+                        self.scratches.alpha = 0.9
+                        self.stateLabel.image = UIImage(named:"infected")
+                    })
                 } else {
-                    self.title = "Don't get tagged!"
+//                    self.title = "Don't get tagged!"
+                    UIView.animateWithDuration(0.7, animations: {
+                        self.vignette.alpha = 0
+                        self.scratches.alpha = 0.65
+                        self.stateLabel.image = UIImage(named:"survivor")
+                    })
                 }
             }
         }
