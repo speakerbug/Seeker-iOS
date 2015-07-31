@@ -70,7 +70,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func mapView(mapView: MKMapView!,
         didSelectAnnotationView view: MKAnnotationView!){
-            println("Selected annotation")
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
