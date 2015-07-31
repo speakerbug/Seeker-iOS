@@ -62,7 +62,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //set image below for humans
                 pinView.image = UIImage(named:"zombie")
             }
-            
             //pinView.animatesDrop = true
             //pinView.canShowCallout = true
             return pinView
